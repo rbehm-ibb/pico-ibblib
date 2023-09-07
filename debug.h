@@ -8,7 +8,7 @@
 #define DEBUG_H
 
 #include <vector>
-#include "pico/stdlib.h"
+#include <pico/stdlib.h>
 
 class Debug
 {

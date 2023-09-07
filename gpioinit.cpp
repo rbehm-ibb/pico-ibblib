@@ -5,7 +5,7 @@
 // ******************************************************
 
 #include <stdio.h>
-#include "hardware/gpio.h"
+#include <hardware/gpio.h>
 #include "gpioinit.h"
 
 GpioInit::GpioInit(const IoDef *def)

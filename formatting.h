@@ -8,7 +8,7 @@
 #define FORMATTING_H
 
 #include <stdint.h>
-#include <vector>
+//#include <vector>
 
 
 namespace Frm
