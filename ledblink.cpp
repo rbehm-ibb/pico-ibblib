@@ -18,14 +18,16 @@ LedBlink::LedBlink(uint pin, uint ms)
 	m_time = delayed_by_ms(get_absolute_time(), m_ms);
 }
 
-void LedBlink::poll()
+bool LedBlink::poll()
 {
 	absolute_time_t t = get_absolute_time();
 	if (t > m_time)
 	{
 		m_time = delayed_by_ms(t, m_ms);
 		gpio_xor_mask(m_pinMask);
+		return true;
 	}
+	return false;
 }
 
 void LedBlink::setTime(absolute_time_t t)

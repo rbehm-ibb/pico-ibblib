@@ -13,7 +13,7 @@ class LedBlink
 {
 public:
 	LedBlink(uint pin, uint ms);
-	void poll();
+	bool poll();
 	void setTime(absolute_time_t t);
 	void toggle();
 private:
