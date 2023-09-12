@@ -26,12 +26,9 @@ public:
 	GpioInit(const IoDef *def);
 	void init();
 	void showGpio() const;
-	void poll();
 private:
 	static const char *gpioConf(int n);
 	const IoDef *  const m_io;
-	uint32_t m_ports;
-	uint32_t m_mask;
 };
 
 #endif // GPIOINIT_H

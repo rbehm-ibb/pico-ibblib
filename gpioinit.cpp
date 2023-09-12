@@ -10,13 +10,11 @@
 
 GpioInit::GpioInit(const IoDef *def)
 	: m_io(def)
-	, m_ports(0)
 {
 }
 
 void GpioInit::init()
 {
-	m_mask = 0;
 	for (const IoDef *def = m_io; def->pin >= 0; ++def)
 	{
 		if (def->name)
@@ -25,7 +23,6 @@ void GpioInit::init()
 			gpio_set_dir(def->pin, def->dir == IoDef::Out);
 			gpio_put(def->pin, def->init);
 			gpio_set_pulls(def->pin, def->pull == IoDef::PUp, def->pull == IoDef::PDn);
-			m_mask |=  1U << def->pin;
 		}
 	}
 //	printf("mask=%017b\n", m_mask);
@@ -43,26 +40,6 @@ void GpioInit::showGpio() const
 			const char *dn  = gpio_is_pulled_down(pin) ? "Dn" : "- ";
 			printf("%02d:%-6s -%s %-3s u=%s, d=%s v=%d\n", pin, def->name, f, (gpio_get_dir(pin) ? "OUT" : "IN"), up, dn, gpio_get(pin));
 		}
-	}
-}
-
-void GpioInit::poll()
-{
-	uint32_t p  = gpio_get_all() & m_mask;
-	uint32_t diff = (p ^ m_ports) & m_mask;
-	if (diff)
-	{
-		printf("p=%017b d=%017b", p, diff);
-		m_ports = p;
-		for (const IoDef *def = m_io; def->pin >= 0; ++def)
-		{
-			uint32_t m = 1UL << def->pin;
-			if (diff & m)
-			{
-				printf(",%s=%d", def->name, !!(p & m));
-			}
-		}
-		printf("\n");
 	}
 }
 
