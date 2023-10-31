@@ -18,6 +18,8 @@ public:
 	static void dump(const std::vector<uint8_t> &d, const char *title = nullptr);
 	static void dump(const std::vector<uint16_t> &d, const char *title = nullptr);	// will dump with swapped bytes
 	static void showSysInfo(const char *version);
+	static uint32_t getTotalHeap(void);
+	static uint32_t getFreeHeap(void);
 private:
 };
 

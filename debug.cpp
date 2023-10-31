@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <pico/unique_id.h>
+#include <malloc.h>
 
 void Debug::dump(const void *src, size_t size, const char *title)
 {
@@ -71,4 +72,16 @@ void Debug::showSysInfo(const char *version)
 	pico_get_unique_board_id_string(s, sizeof(s) - 1);
 	uint l = &__flash_binary_end - ((char *)XIP_BASE);
 	printf("id=<%s> pgmsize=%u/%uk Flashsize=%dM\n", s, l, l / 1024, PICO_FLASH_SIZE_BYTES / 1024 / 1024);
+}
+
+uint32_t Debug::getTotalHeap(void)
+{
+	extern char __StackLimit, __bss_end__;
+	return &__StackLimit  - &__bss_end__;
+}
+
+uint32_t Debug::getFreeHeap(void)
+{
+	struct mallinfo m = mallinfo();
+	return getTotalHeap() - m.uordblks;
 }
