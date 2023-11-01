@@ -7,6 +7,7 @@
 #include "debug.h"
 #include <stdio.h>
 #include <string.h>
+#include <iostream>
 #include <pico/unique_id.h>
 #include <malloc.h>
 
@@ -72,6 +73,25 @@ void Debug::showSysInfo(const char *version)
 	pico_get_unique_board_id_string(s, sizeof(s) - 1);
 	uint l = &__flash_binary_end - ((char *)XIP_BASE);
 	printf("id=<%s> pgmsize=%u/%uk Flashsize=%dM\n", s, l, l / 1024, PICO_FLASH_SIZE_BYTES / 1024 / 1024);
+}
+
+void Debug::heapInfo()
+{
+	extern char __StackLimit, __bss_end__;
+	const struct mallinfo m = mallinfo();
+	std::cout  << "Stacklimit=" << ((void*)&__StackLimit)
+		<< " bssEnd=" << ((void*)&__bss_end__)
+		  << " totalHeap=" << (&__StackLimit  - &__bss_end__)
+		  << " free=" << getFreeHeap()
+		  << std::endl
+		  << "arena=" << m.arena
+		  << " ordblks=" << m.ordblks
+		  << " hblks" << m.hblks
+		  << " hblkhd=" << m.hblkhd
+		  << " uordblks=" << m.uordblks
+		  << " fordblks=" << m.fordblks
+		  << " keepcost=" << m.keepcost
+		  << std::endl;
 }
 
 uint32_t Debug::getTotalHeap(void)
