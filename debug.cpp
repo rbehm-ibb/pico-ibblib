@@ -86,7 +86,7 @@ void Debug::heapInfo()
 		  << std::endl
 		  << "arena=" << m.arena
 		  << " ordblks=" << m.ordblks
-		  << " hblks" << m.hblks
+		  << " hblks=" << m.hblks
 		  << " hblkhd=" << m.hblkhd
 		  << " uordblks=" << m.uordblks
 		  << " fordblks=" << m.fordblks
