@@ -1,3 +1,5 @@
+# https://cliutils.gitlab.io/modern-cmake/chapters/intro/dodonot.html
+
 add_library(gpiolib gpioinit.cpp gpioinit.h )
 target_link_libraries(gpiolib pico_stdlib )
 target_include_directories (gpiolib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
