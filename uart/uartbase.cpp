@@ -4,8 +4,7 @@
 // * created 2/8/2023 by behm
 // ******************************************************
 
-#include <iostream>
-#include "pico/stdlib.h"
+#include <pico/stdlib.h>
 #include "uartbase.h"
 
 UartBase::UartDescr UartBase::uartDefinition[] =

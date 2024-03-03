@@ -7,7 +7,7 @@
 #ifndef UARTBASE_H
 #define UARTBASE_H
 
-#include "hardware/uart.h"
+#include <hardware/uart.h>
 
 ///
 /// \brief The Uart class is only a virtual base class for all Uart classes.

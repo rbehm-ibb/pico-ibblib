@@ -6,9 +6,9 @@
 
 #include <iostream>
 #include <string.h>
-#include "pico/time.h"
+#include <pico/time.h>
 #include "uartipc.h"
-#include "hardware/gpio.h"
+// #include "hardware/gpio.h"
 
 struct UartIpc::States UartIpc::states[5] =
 {
@@ -137,9 +137,9 @@ bool UartIpc::put(std::vector<uint8_t> d)
 
 void UartIpc::uartIsr()
 {
-	const uint32_t mask1 = 1U << 2;
-	const uint32_t mask2 = 1U << 3;
-	bool on = uart_get_dreq(m_uart, 1);
+	// const uint32_t mask1 = 1U << 2;
+	// const uint32_t mask2 = 1U << 3;
+	// bool on = uart_get_dreq(m_uart, 1);
 	while (uart_is_readable(m_uart))
 	{
 		const uint8_t c = uart_getc(m_uart);

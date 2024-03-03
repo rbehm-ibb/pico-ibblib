@@ -8,7 +8,7 @@
 #define UARTIPC_H
 
 #include <vector>
-#include "pico/util/queue.h"
+// #include "pico/util/queue.h"
 #include "uartbase.h"
 
 class UartIpc : public UartBase
